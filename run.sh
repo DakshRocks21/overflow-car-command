@@ -3,6 +3,8 @@
 set -e
 
 usage() {
+    echo "Overflow Open House RC Car Project 🚗💨"
+    echo "Starts the RC car project with the camera, motor control, WebSocket server, and RTSP server."
     echo "Usage: $0 [--full]"
     echo "  --full    Install all dependencies before running the project."
     exit 1
@@ -39,16 +41,36 @@ else
     echo "Skipping full dependency installation. Run with --full to install dependencies."
 fi
 
+cleanup() {
+    echo "Shutting down..."
+    pkill -P $$ 
+    wait        
+    echo "All processes terminated."
+}
+
+trap cleanup SIGINT SIGTERM
+
+
+if [ ! -f ./mediamtx ]; then
+    echo "mediamtx binary not found in the current directory. Extracting from mediamtx.tar.gz..."
+    if [ -f mediamtx.tar.gz ]; then
+        tar -xzvf mediamtx.tar.gz
+        echo "mediamtx binary extracted."
+    else
+        echo "Error: mediamtx.tar.gz file not found. Please ensure it is available in the current directory."
+        exit 1
+    fi
+fi
+
+exit 1
+
+echo "Starting Camera"
+./mediamtx &
+
 echo "Starting motor control script..."
 python3 car.py &
-
-CAR_PID=$!
 
 echo "Starting WebSocket and RTSP server..."
 python3 main.py &
 
-MAIN_PID=$!
-
-trap "echo 'Shutting down...'; kill $CAR_PID $MAIN_PID; exit" SIGINT SIGTERM
-
-wait $CAR_PID $MAIN_PID
+wait

@@ -24,35 +24,46 @@ sudo apt install python3-dev python3-gi python3-gi-cairo gir1.2-gtk-4.0 libcairo
 
 ## Usage
 
+> Recommended to use `tmux` to run this project
+
 1. Configure Environment Variables:
 
-   - Create a .env file in the root directory.
-   - Use config.sample.env as a template.
+   - Create a `config.env` file in the root directory.
+   - Use `config.sample.env` as a template.
 
-2. Run the Project:
-   - Start the motor control script:
+2. Run the Project (Option 1):
+
+   - Run `run.sh` to start the project.
+
+3. Run the Project (Option 2):
+
+- Start the motor control script:
 
 ```bash
 python3 car.py
 ```
 
-3. Start the main WebSocket and RTSP server:
+- Start the main WebSocket and RTSP server:
 
 ```bash
 python3 main.py
 ```
 
-4. (Optional) Access Remotely:
+- Start the Camera
+
+```bash
+./mediamtx
+```
+
+3. (Optional) Access Remotely:
    - Use tools like Tailscale for remote access.
-   - Cloudflared support is planned but not yet implemented.
 
 ## Development
 
 #### Directory Structure
 
 `car.py` : Handles motor control.
-`main.py` : Manages WebSocket communication and video streaming.
-`stream.py`: Implements RTSP streaming using GStreamer and OpenCV.
+`main.py` : Manages WebSocket communication.
 
 #### Testing
 

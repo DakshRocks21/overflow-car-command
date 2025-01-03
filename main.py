@@ -84,12 +84,6 @@ async def handle_message(websocket):
 
 async def main():
     global drive_control
-    Popen(['python3', 'stream.py', 
-            '--device_id', RTSP_OPTIONS["device_id"], 
-            '--fps', RTSP_OPTIONS["fps"], 
-            '--image_width', RTSP_OPTIONS["image_width"], 
-            '--image_height', RTSP_OPTIONS["image_height"], 
-            '--port', RTSP_OPTIONS["port"]])
     print("Connecting to drive control...")
     drive_control = await connect(f"ws://{DRIVE_CONTROL_IP}:{DRIVE_CONTROL_PORT}")
     print("Starting server...")

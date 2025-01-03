@@ -70,7 +70,7 @@ async def handle_message(websocket):
             angle = message_data["angle"]
             accelerate = message_data["accelerate"]
 
-            print(f"Angle: {angle} \tAccelerate: {accelerate}")
+            #print(f"Angle: {angle} \tAccelerate: {accelerate}")
             control_motors(angle, accelerate)
             
 
