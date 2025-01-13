@@ -1,0 +1,14 @@
+[Unit]
+Description=Overflow Car Command Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/pi/overflow-car-command-code/start_car.sh
+WorkingDirectory=/home/pi/overflow-car-command-code
+Restart=always
+User=pi
+Environment=/home/pi/.bashrc
+
+[Install]
+WantedBy=multi-user.target
